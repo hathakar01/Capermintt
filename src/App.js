@@ -1,6 +1,7 @@
 import "./App.css";
+import { Routeall } from "./Components/routes/Route"
 
-import { Routeall } from "./Components/Routes/Route";
+// import { Routeall } from "./Components/routes/Route";
 
 function App() {
   return (
@@ -14,22 +15,3 @@ export default App;
 
 
 
-
-
-
-
-
-
-
- {/* <BrowserRouter>
-
-     <Sidebar>
-      <Routes>
-      <Route path="/" element={<Protected Component={Home}/>} />
-        <Route path="/about" element={<Protected Component={About}/>} />
-        <Route path="/contact" element={<Protected Component={Contact}/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/logout" element={<Protected Component={Logout}/>} />
-      </Routes>
-      </Sidebar>
-      </BrowserRouter> */}

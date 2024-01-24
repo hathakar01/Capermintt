@@ -1,12 +1,12 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from "../Home/Home";
 import About from "../templates/About/About";
 import Contact from "../templates/Contact/Contact";
 import { Login } from "../templates/Login/Login";
 import { Logout } from "../templates/Login/Logout";
 import { Protected } from "../common/Protected";
 import Sidebar from "../common/Drawer/Slidebar";
+import Home from "../templates/Home/Home";
 
 
 

@@ -39,7 +39,7 @@ export const Login = () => {
       <div className="d-flex justify-content-center align-item-center vh-100">
         <div
           className="bg-dark p-3 rounded-5 mt-5"
-          style={{ height: "300px", width: "320px" }}
+          style={{ height: "400px", width: "350px" }}
         >
           <h1 className="text-center text-danger">Login</h1>
           <hr></hr>

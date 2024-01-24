@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import {
   FaTh,
-  FaBars,
   FaUserAlt,
-  FaRegChartBar,
-  FaCommentAlt,
-  FaShoppingBag,
-  FaThList,
   FaLock,
   FaUnlock,
   FaRegClipboard
 } from "react-icons/fa";
-import { NavLink, Link, useNavigate } from "react-router-dom";
-import { IoLogInSharp } from "react-icons/io5";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);

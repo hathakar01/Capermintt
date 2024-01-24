@@ -1,6 +1,4 @@
 import React from "react";
-import Nav from "../common/Navbar/Nav";
-
 function Home() {
   return (
     <div>
