@@ -45,6 +45,32 @@ main{
   color: #f6f6f6;
   transition: all 0.5s;
 }
+.link1{
+  display: flex;
+  background:rgba(209, 31, 31, 0.851);
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+.link1:hover{
+  background:rgba(209, 31, 31, 0.346);
+  color: #f6f6f6;
+  transition: all 0.5s;
+}
+.link2{
+  display: flex;
+  background:rgba(41, 103, 235, 0.851);
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+.link2:hover{
+  background:rgba(41, 102, 235, 0.303);
+  color: #f6f6f6;
+  transition: all 0.5s;
+}
 .active{
   background: rgba(59, 132, 178, 0.868);
   color: #ff0606d5;

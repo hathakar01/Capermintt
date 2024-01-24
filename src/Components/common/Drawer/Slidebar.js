@@ -9,6 +9,7 @@ import {
   FaThList,
   FaLock,
   FaUnlock,
+  FaRegClipboard
 } from "react-icons/fa";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { IoLogInSharp } from "react-icons/io5";
@@ -30,12 +31,12 @@ const Sidebar = ({ children }) => {
     {
       path: "/about",
       name: "About",
-      icon: <FaUserAlt />,
+      icon: <FaRegClipboard />,
     },
     {
       path: "/contact",
       name: "Contact",
-      icon: <FaCommentAlt />,
+      icon: <FaUserAlt />,
     },
     // {
     //   path: "/login",
@@ -89,14 +90,14 @@ const Sidebar = ({ children }) => {
         ))}
         <div className="icon" >
           <div
-            style={{ display: isOpen ? "block" : "none", marginTop:"300px"}}
+            style={{ display: isOpen ? "block" : "none", marginTop:"380px"}}
            
           >
             <NavLink className="link1" to="/login">
               <FaLock />
               Login
             </NavLink>
-            <NavLink className="link1" to="/logout">
+            <NavLink className="link2" to="/logout">
               <FaUnlock />
               Logout
             </NavLink>
