@@ -84,7 +84,7 @@ const Sidebar = ({ children }) => {
         ))}
         <div className="icon" >
           <div
-            style={{ display: isOpen ? "block" : "none", marginTop:"380px"}}
+            style={{ display: isOpen ? "block" : "none", marginTop:"500px"}}
            
           >
             <NavLink className="link1" to="/login">

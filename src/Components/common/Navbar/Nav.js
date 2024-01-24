@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaYoutube } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./Nav.css";
 
 function Nav() {
@@ -26,15 +26,15 @@ function Nav() {
                 <div className={showMidea ? "menu-link mobile-menu-link" : "menu-link"}>
                     <ul >
                         <li>
-                            <Link to="/">Home</Link>
+                            <NavLink to="/">Home</NavLink>
                         </li>
                         <li>
                             {/* <a href="about">About</a> */}
-                            <Link to="/about">About</Link>
+                            <NavLink to="/about">About</NavLink>
                         </li>
 
                         <li>
-                            <Link to="/contact">Contact</Link>
+                            <NavLink to="/contact">Contact</NavLink>
                         </li>
                     </ul>
                 </div>
