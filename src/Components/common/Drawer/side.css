@@ -206,7 +206,7 @@ body {
   
   .menu-btn {
     cursor: pointer;
-    display: none;
+    display: block;
   }
   
   .nav-menu {
@@ -239,7 +239,7 @@ body {
       min-width: 50px;
     }
   
-    .menu-bar .menu-btn {
+    .menu-btn {
       display: block;
       cursor: pointer;
     }
@@ -258,9 +258,9 @@ body {
   }
 
 
-  @media only screen and (max-width: 570px) {
+  /* @media only screen and (max-width: 570px) {
     .menu-bar {
-      min-width: 50px;
+      min-width: 80px;
     }
   
     .menu-bar .menu-btn {
@@ -285,7 +285,7 @@ body {
       display: block;
     }
   }
-  
+   */
 
 
 
