@@ -5,10 +5,9 @@ import Contact from "../templates/Contact/Contact";
 import { Login } from "../templates/Login/Login";
 import { Logout } from "../templates/Login/Logout";
 import { Protected } from "../common/Protected";
-import Sidebar from "../common/Drawer/Slidebar";
 import Home from "../templates/Home/Home";
-import { Navbar } from "../common/Drawer/Navbar";
-import { SideNav } from "../common/Drawer/side";
+import { SideNav } from "../common/side";
+import { Products } from "../common/Products";
 
 
 
@@ -21,6 +20,7 @@ export const Routeall = () => {
         {/* <Sidebar> */}
           <Routes>
             <Route path="/" element={<Protected Component={Home}/>} />
+            <Route path="/product" element={<Protected Component={Products}/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route
               path="/contact"

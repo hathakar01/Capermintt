@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "title": "Watches",
+        "des": "All boys & girls Watches to branded company",
+        "price": 1200,
+        "img": "/Image/watches.jpg"
+    },
+    {
+        "id":2,
+        "title": "Clothes",
+        "des": "All boys & girls Clothes to branded company",
+        "price": 500,
+        "img": "/Image/cloths.png"
+    },
+    {
+        "id":3,
+        "title": "iphone",
+        "des": "All new iphone with apple warrenty",
+        "price": 60000,
+        "img": "/Image/iphone.png"
+    }
+]
