@@ -7,6 +7,8 @@ import { Logout } from "../templates/Login/Logout";
 import { Protected } from "../common/Protected";
 import Sidebar from "../common/Drawer/Slidebar";
 import Home from "../templates/Home/Home";
+import { Navbar } from "../common/Drawer/Navbar";
+import { SideNav } from "../common/Drawer/side";
 
 
 
@@ -14,7 +16,9 @@ export const Routeall = () => {
   return (
     <div>
       <BrowserRouter>
-        <Sidebar>
+        <SideNav>
+        {/* <Navbar/> */}
+        {/* <Sidebar> */}
           <Routes>
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
@@ -25,7 +29,8 @@ export const Routeall = () => {
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Protected Component={Logout}/>} />
           </Routes>
-        </Sidebar>  
+          </SideNav>
+        {/* </Sidebar>   */}
       </BrowserRouter>
     </div>
   );

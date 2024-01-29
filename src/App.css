@@ -10,32 +10,34 @@ main{
   width: 100%;
   padding: 20px;
 }
-.sidebar{
- 
-  
+.sidebar{ 
+  background: black;
   color: #fff;
   height: 100vh;
-  width: 200px;
+  /* width: 200px; */
   transition: all 0.5s;
+  padding: 15px;
+  text-align: center;
+
 }
 .top_section{
   display: flex;
   align-items:center;
-  padding:20px 10px;
+  padding:20px 5px;
   
 }
 .logo1{
-  font-size: 30px;
+  font-size: 40px;
   margin-left: 10px;
 }
 .bars{
   display: flex;
-  font-size: 25px;
+  font-size: 20px;
   margin-left: 30px;
 }
 .link{
   display: flex;
-  color: #fff;
+  color: #ffffff;
   padding: 10px 15px;
   gap: 15px;
   transition: all 0.5s;
@@ -75,6 +77,11 @@ main{
   background: rgba(59, 132, 178, 0.868);
   color: #ff0606d5;
 }
-.icon, .link_text{
+.icon{
+  font-size: 25px;
+} 
+
+.link_text{
   font-size: 20px;
 }
+
