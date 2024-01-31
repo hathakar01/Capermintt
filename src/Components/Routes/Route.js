@@ -8,12 +8,13 @@ import { Protected } from "../common/Protected";
 import Home from "../templates/Home/Home";
 import { SideNav } from "../common/side";
 import { Products } from "../common/Products";
+import { ProductDetails } from "../common/ProductDetails";
 
 
 
 export const Routeall = () => {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <SideNav>
         {/* <Navbar/> */}
@@ -21,6 +22,7 @@ export const Routeall = () => {
           <Routes>
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/product" element={<Protected Component={Products}/>} />
+            <Route path="/product/:id" element={<ProductDetails/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route
               path="/contact"
@@ -32,6 +34,6 @@ export const Routeall = () => {
           </SideNav>
         {/* </Sidebar>   */}
       </BrowserRouter>
-    </div>
+    </>
   );
 };

@@ -16,9 +16,14 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Chip from "@mui/joy/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 // import Button from "@mui/joy/Button";
+import "./font.css";
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
+    Card:{
+      boxShadow: " 5px 8px 10px 0 rgba(3, 158, 255, 0.431)",
+    },
     text1:{
         fontSize: 'clamp(8px, 5vw, 24px)',  //min, val, max 
     },
@@ -30,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 'clamp(2vh, 25px, 5vw)',  //min, val, max 
     },
     textDes:{
-        fontSize: 'clamp(2vh, 20px, 5vw)',  //min, val, max 
+        fontSize: 'clamp(10px, 1vw, 20px)',  //min, val, max 
     }
 }));
 
@@ -38,18 +43,29 @@ const useStyles = makeStyles((theme) => ({
 export const Products = () => {
 
     const classes = useStyles();
+    const navigate = useNavigate();
+    const handleCard=(value)=>{
+        // alert(value)
+        console.log(value)
+        navigate(`/product/${value}`);
+    }
 
   return (
     <>
       <Container maxWidth="lg">
-        <Typography variant="h3" align="center" style={{ marginTop: "50px" }}>
+        {/* <Typography variant="h3" align="center" style={{ marginTop: "50px" }}>
           Product List
-        </Typography>
+        </Typography> */}
+        <h1 className="poppinsRegular text-center mt-5">Product List</h1>
+
         <Grid container spacing={4} style={{ marginTop: "20px" }}>
           {Data.map((result, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card sx={{ maxWidth: 100 }}>
+          
+              <Card className={classes.Card} sx={{ maxWidth: 100 }} onClick={()=>handleCard(result.id)}>
+              {/* <NavLink to={`${result.id}`}> */}
                 <CardActionArea>
+               
                   <CardMedia
                     component="img"
                     height="200"
@@ -65,6 +81,7 @@ export const Products = () => {
                     />
                   </AspectRatio> */}
                   </CardMedia>
+                 
                   <CardContent>
                     <Typography  className={classes.text01} level="body-xs">Bluetooth</Typography>
 
@@ -94,7 +111,7 @@ export const Products = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-
+                {/* </NavLink> */}
                 
 
                 <CardActions className="bg-dark">
@@ -104,24 +121,17 @@ export const Products = () => {
                     ₹{result.price}
                   </Typography>
                   </Grid>
-                  <Grid xs>
+                  <Grid xs={2}>
                    
                   </Grid>
-                  <Grid xs={6}>
-                  <Button variant="contained" size="medium">
+                  <Grid xs={6} style={{display:"grid"}}>
+                  <Button variant="contained" size="medium" >
                     Add to Card
                   </Button>
                   </Grid>
                 </Grid>
-                  {/* <Typography variant="h5" className="text-white">
-                    ₹{result.price}
-                  </Typography>
-            
-
-                  <Button variant="contained" size="medium">
-                    Add to Card
-                  </Button> */}
                 </CardActions>
+
               </Card>
             </Grid>
           ))}
@@ -130,16 +140,3 @@ export const Products = () => {
     </>
   );
 };
-
-{
-  /* <CardActions style={{ background:"black"}}>
-<Typography variant="h5" className="text-white" style={{marginRight:"80px", marginLeft:"10px"}} >
-₹{result.price}
-</Typography>
-<Button variant="contained" size="meduim" >
- Add to cart
- <AddShoppingCartIcon  color="danger"/>
-</Button>
-
-</CardActions> */
-}

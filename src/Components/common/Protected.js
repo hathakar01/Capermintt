@@ -7,7 +7,7 @@ export const Protected = (props) => {
 
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem("login"));
-    console.log(login);
+    //console.log(login);
 
     if (!login) {
       navigate("/login");

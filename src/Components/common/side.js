@@ -14,10 +14,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   body: {
     margin: 0,
-    fontFamily: "Arial, sans-serif",
+    //fontFamily: "Arial, sans-serif",
   },
   dashboardContainer: {
-    display: "flex",
+    // height:"100vh",
+    // width:"100vw",
+    display:"flex"
   },
   menuBar: {
     backgroundColor: "#333",
@@ -28,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
     height: 698,
   },
   sidebar: {
-    background: "#252525e2",
+    background: "black",
     color: "#fff",
     height: "100vh",
+    
     transition: "all 0.5s",
     padding: 15,
     textAlign: "center",
@@ -56,8 +59,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   main: {
-    width: "100%",
+    height:"100vh",
+    overflowY:"scroll",
+    // width:"90vw",
     padding: 20,
+  
   },
   topSection: {
     display: "flex",
@@ -231,7 +237,7 @@ export const SideNav = ({ children }) => {
       </div>
 
       <div className={classes.mainContent}>
-        <main>{children}</main>
+        <main className={classes.main}>  {children}</main>
       </div>
     </div>
   );

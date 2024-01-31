@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -35,7 +35,7 @@ export const Login = () => {
    }
 
   return (
-    <div>
+ 
       <div className="d-flex justify-content-center align-item-center h-100">
         <div
           className="bg-dark p-3 rounded-5 mt-5"
@@ -80,6 +80,6 @@ export const Login = () => {
           </form>
         </div>
       </div>
-    </div>
+   
   );
 };
