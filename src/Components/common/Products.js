@@ -69,7 +69,7 @@ export const Products = () => {
                   <CardMedia
                     component="img"
                     height="200"
-                    image={result.img}
+                    image={result.img[0]}
                     alt=""
                     style={{ borderRadius: "10px" }}
                   >
@@ -83,7 +83,7 @@ export const Products = () => {
                   </CardMedia>
                  
                   <CardContent>
-                    <Typography  className={classes.text01} level="body-xs">Bluetooth</Typography>
+                    <Typography  className={classes.text01} level="body-xs">{result.company}</Typography>
 
                     <Typography className={classes.text1} gutterBottom variant="h4" component="div">
                       {result.title}
