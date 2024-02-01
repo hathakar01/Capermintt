@@ -68,7 +68,7 @@ export const ProductDetails = () => {
             padding: "30px",
             marginTop: "20px",
             // border: "solid 2px red",
-            // background: "linear-gradient(45deg, #000000c7, transparent)",
+            //background: "linear-gradient(45deg, #000000c7, transparent)",
           }}
         >
           <Grid xs={8}>
