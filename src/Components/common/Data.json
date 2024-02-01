@@ -1,0 +1,41 @@
+[
+    {
+        "id":1,
+        "title": "Watches",
+        "company": "Fastrack",
+        "des": "All boys & girls Watches to branded company",
+        "price": 1200,
+        "img": [ 
+                    "/Image/watches.jpg",
+                    "/Image/watch2.jpg",
+                    "/Image/watch3.jpg",
+                    "/Image/watch4.jpg"
+            ]
+    },
+    {
+        "id":2,
+        "title": "Clothes",
+        "company": "Holister",
+        "des": "All boys & girls Clothes to branded company",
+        "price": 500,
+        "img": [ 
+                    "/Image/cloths.png",
+                    "/Image/cloth2.jpg",
+                    "/Image/cloth3.jpg",
+                    "/Image/cloth4.jpg"     
+            ]
+    },
+    {
+        "id":3,
+        "title": "iphone 15",
+        "company": "iphone",
+        "des": "All new iphone with apple warrenty",
+        "price": 60000,
+        "img": [
+                   "/Image/iphone1.jpg",
+                   "/Image/iphone2.jpg",
+                   "/Image/iphone3.jpg",
+                   "/Image/iphone4.jpg"
+    ]
+    }
+]

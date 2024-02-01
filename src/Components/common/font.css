@@ -1,0 +1,19 @@
+
+
+@font-face {
+    font-family: poppins-Regular;
+    src: url(/public/Fonts/Poppins-Regular.ttf);
+}
+
+.poppinsRegular{
+    font-family: poppins-Regular;
+}
+
+@font-face {
+    font-family: objectScansRegular;
+    src: url(/public/Fonts/ObjectSansRegular.otf);
+}
+
+.objectSans{
+    font-family: objectScansRegular;
+}
