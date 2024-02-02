@@ -9,6 +9,7 @@ import Home from "../templates/Home/Home";
 import { SideNav } from "../common/side";
 import { Products } from "../common/Products";
 import { ProductDetails } from "../common/ProductDetails";
+import AddCart from "../common/AddCart";
 
 
 
@@ -23,6 +24,7 @@ export const Routeall = () => {
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/product" element={<Protected Component={Products}/>} />
             <Route path="/product/:id" element={<ProductDetails/>} />
+            <Route path="/cart/:id" element={<AddCart/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route
               path="/contact"

@@ -6,6 +6,7 @@ import {
   FaHome,
   FaUnlock,
   FaProductHunt,
+  FaCartPlus 
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -174,6 +175,11 @@ export const SideNav = ({ children }) => {
       path: "/Contact",
       name: "Contact",
       icon: <FaCommentAlt />,
+    },
+    {
+      path: "/cart/:id",
+      name: "Cart",
+      icon: <FaCartPlus  />,
     },
 
     {

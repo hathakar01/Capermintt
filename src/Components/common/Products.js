@@ -20,8 +20,8 @@ import "./font.css";
 import { useNavigate } from "react-router-dom";
 import Typo from "./MyComponents/Typo";
 import Cards from "./MyComponents/Cards";
-
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/slices/ProductSlice";
 
 const useStyles = makeStyles((theme) => ({
     
@@ -84,13 +84,20 @@ export const Products = () => {
         navigate(`/product/${value}`);
     }
 
+    const dispatch = useDispatch();
+    const addProduct = (value1) =>{
+        console.log(value1, 'product')
+        dispatch(addToCart(value1));
+        navigate(`/cart/${value1}`)
+    };
+
   return (
     <>
       <Container maxWidth="lg">
         {/* <Typography variant="h3" align="center" style={{ marginTop: "50px" }}>
           Product List
         </Typography> */}
-        <h1 className="poppinsRegular text-center mt-5">Product List</h1>
+        <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
 
 
 
@@ -111,32 +118,14 @@ export const Products = () => {
                           <Typo variant="des1">(Only <b>7</b> left in stock!)</Typo>
                           </div>
                       </div>
-                        {/* <CardActionArea variant="action1" onClick={() => handleCard(result.id)}>
-                            <CardMedia
-                                component="img"
-                                height="300"
-                                image={result.img[0]}
-                                alt="green iguana"
-                                style={{ borderRadius: "5px" }}
-                            />
-                            <div>
-                                <div className={classes.textTitle} >
-                                    {result.title}
-                                </div>
-
-                                <Typo variant="tp01">Test Dat for Common component</Typo>
-                                <div className={classes.textDes}>
-                                    {result.des}
-                                </div>
-                            </div>
-                        </CardActionArea> */}
+                        
                         <div className="bg-dark">
                         <div className={classes.action2}>
                             <h3 className={classes.text2}>
                                  ₹{result.price}
                             </h3>
 
-                            <Button className={classes.textButton} variant="contained" size="medium">Add to Card</Button>
+                            <Button className={classes.textButton} variant="contained" size="medium" onClick={()=> addProduct(result.id)}>Add to Card</Button>
 
                         </div>
                         </div>

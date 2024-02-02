@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Data from "./Data.json";
 import CarouselView from "./CarouselView";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ProductDetails = () => {
+
+  const navigate = useNavigate();
   const { id } = useParams();
   const selectedProduct = Data?.filter((item) => item.id == id);
   const id1 = Number(id);
@@ -56,7 +58,7 @@ export const ProductDetails = () => {
           >
           
           </Typography> */}
-      <Button size="small">
+      <Button size="small" onClick={()=> navigate(-1)}>
         <KeyboardArrowLeft />
         Back
       </Button>
