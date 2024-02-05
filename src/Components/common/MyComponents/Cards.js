@@ -15,6 +15,19 @@ const useStyles = makeStyles({
             boxShadow: '0 10px 20px 0 rgba(0,0,0,0.2)',
         },
     },
+
+    addToCart :{
+        flex : '1 0 8rem',
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+        // display:"grid",
+        transition: '0.3s',
+        width: '50%',
+        // maxWidth: 100,
+        '&:hover': {
+            boxShadow: '0 10px 20px 0 rgba(0,0,0,0.2)',
+        },
+    },
+
     '@media only screen and (max-width: 960px)' :{
         card :{
            flexGrow: 0,
@@ -29,10 +42,10 @@ const useStyles = makeStyles({
        }},
 })
 
-const Cards = ({ children }) => {
+const Cards = ({ children, variant }) => {
     const classes = useStyles()
     return (
-        <div className={classes.card}>{children}</div>
+        <div className={variant === "card" ? classes.card : variant === "addToCart"}>{children}</div>
     )
 }
 

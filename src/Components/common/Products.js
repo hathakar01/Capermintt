@@ -85,10 +85,10 @@ export const Products = () => {
     }
 
     const dispatch = useDispatch();
-    const addProduct = (value1) =>{
-        console.log(value1, 'product')
-        dispatch(addToCart(value1));
-        navigate(`/cart/${value1}`)
+    const addProduct = (productData) =>{
+        console.log(productData, 'product')
+        dispatch(addToCart(productData));
+        // navigate(`/cart`)
     };
 
   return (
@@ -104,7 +104,7 @@ export const Products = () => {
         <div className={classes.Container}>
 
                 {Data.map((result, index) => (
-                    <Cards className={classes.card}  >
+                    <Cards variant="card" className={classes.card}  >
 
 
                       <div onClick={()=>handleCard(result.id)}>
@@ -125,24 +125,12 @@ export const Products = () => {
                                  ₹{result.price}
                             </h3>
 
-                            <Button className={classes.textButton} variant="contained" size="medium" onClick={()=> addProduct(result.id)}>Add to Card</Button>
+                            <Button className={classes.textButton} variant="contained" size="medium" onClick={()=> addProduct(result)}>Add to Card</Button>
 
                         </div>
                         </div>
                         
-                        {/* <div className={classes.cardAction}>
-                            <div class={classes.gridContainer}>
-                              <div className={classes.gridItem}>
-                                 ₹{result.price}
-                              </div>
-                              
-                              <div className={classes.gridItem} >
-                              <Button variant="contained" size="medium" >
-                                   Add to Card
-                              </Button>
-                              </div>
-                            </div>
-                        </div> */}
+                       
           
                     </Cards>
                 ))}

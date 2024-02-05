@@ -11,7 +11,10 @@ const productSlice = createSlice({
             // console.log(action)
         },
         buyNow(state, action) {},
-        deleteProduct(state, action) {},
+        deleteProduct(state, action) {
+            console.log(action.payload)
+            state.pop(action.payload)
+        },
     },
 });
 
