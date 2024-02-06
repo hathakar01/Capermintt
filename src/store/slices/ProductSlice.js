@@ -7,13 +7,14 @@ const productSlice = createSlice({
     reducers: {
         addToCart(state, action) {
             state.push(action.payload);
-           // console.log(action.payload);
+           console.log(action.payload, 'store');
             // console.log(action)
         },
         buyNow(state, action) {},
         deleteProduct(state, action) {
-            console.log(action.payload)
-            state.pop(action.payload)
+            // console.log(action.payload)
+            // state.pop(action.payload)
+            state.splice(action.payload, 1)
         },
     },
 });

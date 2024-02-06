@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ProductDetails = () => {
-
   const navigate = useNavigate();
   const { id } = useParams();
   const selectedProduct = Data?.filter((item) => item.id == id);
@@ -58,7 +57,7 @@ export const ProductDetails = () => {
           >
           
           </Typography> */}
-      <Button size="small" onClick={()=> navigate(-1)}>
+      <Button size="small" onClick={() => navigate(-1)}>
         <KeyboardArrowLeft />
         Back
       </Button>
@@ -116,7 +115,7 @@ export const ProductDetails = () => {
               </CardActionArea>
               {/* </NavLink> */}
 
-              <CardActions style={{marginTop: "450px"}}>
+              <CardActions style={{ marginTop: "450px" }}>
                 <Grid
                   container
                   spacing={2}
@@ -124,13 +123,17 @@ export const ProductDetails = () => {
                   style={{ padding: "10px" }}
                 >
                   <Grid xs={6} style={{ display: "grid" }}>
-                   <Button variant="contained" size="medium">
+                    <Button variant="contained" size="medium">
                       Add to Card
                     </Button>
                   </Grid>
-                 {/* <Grid xs></Grid> */}
-                  <Grid xs={6} style={{ display: "grid", }}>
-                    <Button variant="contained" size="medium" style={{backgroundColor:"#e43131cf",color:"white"}}>
+                  {/* <Grid xs></Grid> */}
+                  <Grid xs={6} style={{ display: "grid" }}>
+                    <Button
+                      variant="contained"
+                      size="medium"
+                      style={{ backgroundColor: "#e43131cf", color: "white" }}
+                    >
                       Buy Now
                     </Button>
                   </Grid>
