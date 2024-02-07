@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Data from "./Data.json";
@@ -13,6 +13,9 @@ import Typo from "./MyComponents/Typo";
 import Cards from "./MyComponents/Cards";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/slices/ProductSlice";
+import { color } from "@material-ui/system";
+
+
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -67,10 +70,18 @@ export const Products = () => {
     navigate(`/product/${value}`);
   };
 
+
+
   const dispatch = useDispatch();
+
+  const [addedProducts, setAddedProducts] = useState([]);
+
+
   const addProduct = (productData) => {
     console.log(productData, "product");
     dispatch(addToCart(productData));
+
+    setAddedProducts([...addedProducts, productData.id]);
     // navigate(`/cart`)
   };
 
@@ -78,7 +89,7 @@ export const Products = () => {
     <>
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
-
+       
         <div className={classes.Container}>
           {Data.map((result, index) => (
             <Cards variant="card" className={classes.card}>
@@ -111,8 +122,9 @@ export const Products = () => {
                     variant="contained"
                     size="medium"
                     onClick={() => addProduct(result)}
+                    disabled={addedProducts.includes(result.id)}
                   >
-                    Add to Card
+                   Add to Cart {/* {addedProducts.includes(result.id) ? 'Added to Cart' : 'Add to Cart'} */}
                   </Button>
                 </div>
               </div>
@@ -122,4 +134,4 @@ export const Products = () => {
       </Container>
     </>
   );
-};
+}

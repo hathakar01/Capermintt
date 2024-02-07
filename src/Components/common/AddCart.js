@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Button } from "@material-ui/core";
+import { Card, Button, Typography } from "@material-ui/core";
 import {
   FaCartArrowDown,
   FaRegPlusSquare,
@@ -67,12 +67,23 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
     alignItems: "end",
   },
+  
+  deletIcon:{
+      height:'30px',
+      width: '40px'
+  },
   text2: {
     color: "black",
     fontSize: "clamp(2vh, 25px, 5vw)", //min, val, max
     textAlign: "center",
     display: "flex",
   },
+  total:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "end",
+    margin: "40px"
+  }
 }));
 
 const AddCart = () => {
@@ -81,15 +92,32 @@ const AddCart = () => {
   const classes = useStyles();
 
   const data = useSelector((state) => state.products);
+  console.log(data);
+  // State to track quantity for each product
+  const [quantities, setQuantities] = useState({});
 
-  console.log(data, "data");
   const deleteUser = (id) => {
     dispatch(deleteProduct(id));
   };
-  const handleCard = (value) => {
-    // alert(value)
-    console.log(value);
-    navigate(`/product/${value}`);
+
+  const handleIncrement = (id) => {
+    setQuantities(prevState => ({
+      ...prevState,
+      [id]: (prevState[id] || 0) + 1
+    }));
+  };
+
+  const handleDecrement = (id) => {
+    if (quantities[id] > 1) {
+      setQuantities(prevState => ({
+        ...prevState,
+        [id]: prevState[id] - 1
+      }));
+    }
+  };
+
+  const handleCard = (product) => {
+    navigate(`/product/${product.id}`, { state: { quantity: quantities[product.id] || 1 } });
   };
 
   return (
@@ -111,21 +139,20 @@ const AddCart = () => {
                 className={classes.CardMedia}
               />
               <div className={classes.container}>
-                <Typo variant="des">{product.company}</Typo>
-                <Typo variant="title">{product.title}</Typo>
-                <Typo variant="des">{product.des}</Typo>
-
-                <h3 variant="price">₹{product.price}</h3>
+                <Typography variant="body1">{product.company}</Typography>
+                <Typography variant="h5">{product.title}</Typography>
+                <Typography variant="body1">{product.des}</Typography>
+                <Typography variant="h6">₹{product.price * (quantities[product.id] || 1)}</Typography>
               </div>
               <div className={classes.action2}></div>
               <div className={classes.action2}>
                 <div className={classes.text2}>
-                  <Button>
-                    <FaRegPlusSquare />
-                  </Button>
-                  <h3 className={classes.text2}>1</h3>
-                  <Button>
+                  <Button onClick={() => handleDecrement(product.id)}>
                     <FaRegMinusSquare />
+                  </Button>
+                  <Typography className={classes.text2}>{quantities[product.id] || 1}</Typography>
+                  <Button onClick={() => handleIncrement(product.id)}>
+                    <FaRegPlusSquare />
                   </Button>
                 </div>
 
@@ -134,14 +161,17 @@ const AddCart = () => {
                   variant="contained"
                   size="medium"
                   style={{ backgroundColor: "#e43131cf", color: "white" }}
+                  onClick={() => handleCard(product)}
                 >
                   Buy Now
                 </Button>
               </div>
               <div className={classes.action2}>
-                <button className="btn btn-lg" onClick={() => deleteUser(id)}>
-                  <MdDeleteOutline color="red" />
-                </button>
+                <MdDeleteOutline
+                  className={classes.deletIcon}
+                  color="red"
+                  onClick={() => deleteUser(id)}
+                />
               </div>
             </div>
           </Card>
@@ -150,5 +180,7 @@ const AddCart = () => {
     </Container>
   );
 };
+
+
 
 export default AddCart;

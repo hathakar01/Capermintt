@@ -9,9 +9,10 @@ export const Protected = (props) => {
     let login = JSON.parse(localStorage.getItem("login"));
     //console.log(login);
 
+
     if (!login) {
       navigate("/login");
-    }else if (!(login.username === "Harshal" && login.password === "0101")) {
+    }else if (!((login.username === "Harshal" && login.password === "0101") || (login.username === "admin" && login.password === "admin"))) {
       navigate("/login");
     }
   }, []);
