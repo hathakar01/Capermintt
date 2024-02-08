@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     card: {
         // gap: '3em',
         //flexWrap: 'wrap',
-        flex : '1 0 8rem',
+        //flex : '1 0 8rem',
         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
         transition: '0.3s',
         width: '30%',

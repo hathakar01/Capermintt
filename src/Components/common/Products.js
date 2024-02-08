@@ -131,6 +131,8 @@ export const Products = () => {
       setOpen(false)
     })
   }
+
+  
  
   return (
     <>
@@ -163,6 +165,7 @@ export const Products = () => {
                 name="title"
                 className="form-control form-control-lg wh-100"
                 placeholder="Enter name"
+                required
               onChange={(e) => setInputData({...inputData ,title: e.target.value})}
               />
             </div>
@@ -175,6 +178,7 @@ export const Products = () => {
                 name="company"
                 className="form-control form-control-lg"
                 placeholder="Enter company"
+                required
                 onChange={(e) => setInputData({...inputData ,company: e.target.value})}
               />
             </div>
@@ -185,6 +189,7 @@ export const Products = () => {
               <input
                 type="text"
                 name="des"
+                required
                 className="form-control form-control-lg"
                 placeholder="Enter description"
                 onChange={(e) => setInputData({...inputData ,des: e.target.value})}
@@ -195,10 +200,11 @@ export const Products = () => {
                 <strong>Product Price</strong>
               </h5>
               <input
-                type="text"
+                type="number"
                 name="price"
                 className="form-control form-control-lg"
                 placeholder="Enter price"
+                required
              onChange={(e) => setInputData({...inputData ,price: e.target.value})}
               />
             </div>
@@ -211,9 +217,11 @@ export const Products = () => {
                 name="img"
                 className="form-control form-control-lg"
                 placeholder="Enter Img path"
-             onChange={(e) => setInputData({...inputData ,img: e.target.value})}
+                required
+             onChange={(e) => setInputData({...inputData ,img: [e.target.value]})}
               />
             </div>
+
             <DialogActions >
       
               <button type="submit" className="btn btn-danger btn-lg w-100">
@@ -234,7 +242,7 @@ export const Products = () => {
               <div onClick={() => handleCard(result.id)}>
                 <div>
                   <img
-                    src={result.img}
+                    src={result.img[0]}
                     alt=""
                     className={classes.CardMedia}
                   />
@@ -244,7 +252,9 @@ export const Products = () => {
                     {result.company}
                   </Typography>
                   <Typo variant="title">{result.title}</Typo>
+                  <div style={{height:"70px"}}>
                   <Typo variant="des">{result.des}</Typo>
+                  </div>
                   <Typo variant="des1">
                     (Only <b>7</b> left in stock!)
                   </Typo>
