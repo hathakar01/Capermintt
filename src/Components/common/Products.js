@@ -14,13 +14,22 @@ import Cards from "./MyComponents/Cards";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/slices/ProductSlice";
 import { color } from "@material-ui/system";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
     flexWrap: "wrap",
+    marginTop:"20px",
     gap: "1em",
   },
   cardAction: {
@@ -70,12 +79,9 @@ export const Products = () => {
     navigate(`/product/${value}`);
   };
 
-
-
   const dispatch = useDispatch();
 
   const [addedProducts, setAddedProducts] = useState([]);
-
 
   const addProduct = (productData) => {
     console.log(productData, "product");
@@ -84,12 +90,98 @@ export const Products = () => {
     setAddedProducts([...addedProducts, productData.id]);
     // navigate(`/cart`)
   };
+  
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return (
     <>
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
-       
+        <React.Fragment>
+      <Button variant="outlined" onClick={handleClickOpen} style={{margin:"auto", display:"flex"}}>
+        Add Product
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+        style={{width:"105%"}}
+      >
+        <div style={{width:"500px"}}>
+        <DialogTitle style={{background:"#eaf5ffe0", display:"flex",justifyContent:"center"}}>{"Add Products Details"}</DialogTitle>
+        <DialogContent style={{background:"linear-gradient(45deg, black, #333272)",}}>
+          <DialogContentText id="alert-dialog-slide-description">
+          <form style={{marginTop:"30px"}}>
+            <div className="mb-3">
+              <h5 className="text-light">
+                <strong>Product Title</strong>
+              </h5>
+              <input
+                type="text"
+                autoComplete="off"
+                name="email"
+                className="form-control form-control-lg wh-100"
+                placeholder="Enter name"
+              // onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <h5 className="text-light">
+                <strong>Product Company</strong>
+              </h5>
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter company"
+              // onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <h5 className="text-light">
+                <strong>Product Description</strong>
+              </h5>
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter description"
+              // onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <h5 className="text-light">
+                <strong>Product Price</strong>
+              </h5>
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter price"
+              // onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </form>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions style={{background:"linear-gradient(164deg, black, rgb(51, 50, 114))"}}>
+      
+              <button type="submit" className="btn btn-danger btn-lg w-100">
+                Add
+              </button>
+            
+        </DialogActions>
+        </div>
+      </Dialog>
+    </React.Fragment>
         <div className={classes.Container}>
           {Data.map((result, index) => (
             <Cards variant="card" className={classes.card}>
@@ -124,7 +216,8 @@ export const Products = () => {
                     onClick={() => addProduct(result)}
                     disabled={addedProducts.includes(result.id)}
                   >
-                   Add to Cart {/* {addedProducts.includes(result.id) ? 'Added to Cart' : 'Add to Cart'} */}
+                    Add to Cart{" "}
+                    {/* {addedProducts.includes(result.id) ? 'Added to Cart' : 'Add to Cart'} */}
                   </Button>
                 </div>
               </div>
@@ -134,4 +227,5 @@ export const Products = () => {
       </Container>
     </>
   );
-}
+};
+
