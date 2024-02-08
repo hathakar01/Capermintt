@@ -23,7 +23,7 @@ export const Routeall = () => {
           <Routes>
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/product" element={<Protected Component={Products}/>} />
-            <Route path="/product/:id" element={<ProductDetails/>} />
+            <Route path="/product" element={<ProductDetails/>} />
             <Route path="/cart/:id" element={<AddCart/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route

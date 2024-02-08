@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Data from "./Data.json";
@@ -20,6 +20,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -101,7 +102,36 @@ export const Products = () => {
     setOpen(false);
   };
 
+  const [inputData, setInputData] = useState({
+    title:'',
+    company:'',
+    des:'',
+    price:'',
+    img:''
+  })
+  
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState([])
+  
 
+  useEffect(() =>{
+    axios.get('https://65c4700adae2304e92e29905.mockapi.io/p1/product')
+    .then(res => setValue(res.data))
+    .catch(err => console.log(err))
+  }, []);
+
+  console.log(value, 'value');
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('https://65c4700adae2304e92e29905.mockapi.io/p1/product/', inputData)
+    .then(res =>{
+      alert("Add the data success!")
+      navigate('/product')
+      setOpen(false)
+    })
+  }
+ 
   return (
     <>
       <Container maxWidth="lg">
@@ -122,7 +152,7 @@ export const Products = () => {
         <DialogTitle style={{background:"#eaf5ffe0", display:"flex",justifyContent:"center"}}>{"Add Products Details"}</DialogTitle>
         <DialogContent style={{background:"linear-gradient(45deg, black, #333272)",}}>
           <DialogContentText id="alert-dialog-slide-description">
-          <form style={{marginTop:"30px"}}>
+          <form onSubmit={handleSubmit} style={{marginTop:"30px"}}>
             <div className="mb-3">
               <h5 className="text-light">
                 <strong>Product Title</strong>
@@ -130,10 +160,10 @@ export const Products = () => {
               <input
                 type="text"
                 autoComplete="off"
-                name="email"
+                name="title"
                 className="form-control form-control-lg wh-100"
                 placeholder="Enter name"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setInputData({...inputData ,title: e.target.value})}
               />
             </div>
             <div className="mb-3">
@@ -142,9 +172,10 @@ export const Products = () => {
               </h5>
               <input
                 type="text"
+                name="company"
                 className="form-control form-control-lg"
                 placeholder="Enter company"
-              // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setInputData({...inputData ,company: e.target.value})}
               />
             </div>
             <div className="mb-3">
@@ -153,9 +184,10 @@ export const Products = () => {
               </h5>
               <input
                 type="text"
+                name="des"
                 className="form-control form-control-lg"
                 placeholder="Enter description"
-              // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setInputData({...inputData ,des: e.target.value})}
               />
             </div>
             <div className="mb-3">
@@ -164,31 +196,45 @@ export const Products = () => {
               </h5>
               <input
                 type="text"
+                name="price"
                 className="form-control form-control-lg"
                 placeholder="Enter price"
-              // onChange={(e) => setPassword(e.target.value)}
+             onChange={(e) => setInputData({...inputData ,price: e.target.value})}
               />
             </div>
-          </form>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions style={{background:"linear-gradient(164deg, black, rgb(51, 50, 114))"}}>
+            <div className="mb-3">
+              <h5 className="text-light">
+                <strong>Product Image</strong>
+              </h5>
+              <input
+                type="text"
+                name="img"
+                className="form-control form-control-lg"
+                placeholder="Enter Img path"
+             onChange={(e) => setInputData({...inputData ,img: e.target.value})}
+              />
+            </div>
+            <DialogActions >
       
               <button type="submit" className="btn btn-danger btn-lg w-100">
                 Add
               </button>
             
         </DialogActions>
+          </form>
+          </DialogContentText>
+        </DialogContent>
+        
         </div>
       </Dialog>
     </React.Fragment>
         <div className={classes.Container}>
-          {Data.map((result, index) => (
-            <Cards variant="card" className={classes.card}>
+          {value.map((result, index) => (
+            <Cards variant="card" className={classes.card} >
               <div onClick={() => handleCard(result.id)}>
                 <div>
                   <img
-                    src={result.img[0]}
+                    src={result.img}
                     alt=""
                     className={classes.CardMedia}
                   />
