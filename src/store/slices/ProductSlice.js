@@ -10,6 +10,9 @@ const productSlice = createSlice({
            console.log(action.payload, 'store');
             // console.log(action)
         },
+        login(state, action){
+            
+        },
         buyNow(state, action) {},
         deleteProduct(state, action) {
             // console.log(action.payload)

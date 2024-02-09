@@ -15,7 +15,13 @@ import { AdminProductPage } from "../templates/Admin/AdminProductPage";
 
 
 export const Routeall = () => {
+
+  let login = JSON.parse(localStorage.getItem("login"));
+  console.log(login , '01')
   return (
+
+
+
     <>
       <BrowserRouter>
         <SideNav>
