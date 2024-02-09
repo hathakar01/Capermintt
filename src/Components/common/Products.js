@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Data from "./Data.json";
-import AspectRatio from "@mui/joy/AspectRatio";
-import CardOverflow from "@mui/joy/CardOverflow";
-import Chip from "@mui/joy/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 // import Button from "@mui/joy/Button";
 import "./font.css";
@@ -138,104 +135,7 @@ export const Products = () => {
     <>
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
-        <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen} style={{margin:"auto", display:"flex"}}>
-        Add Product
-      </Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-        style={{width:"105%"}}
-      >
-        <div style={{width:"500px"}}>
-        <DialogTitle style={{background:"#eaf5ffe0", display:"flex",justifyContent:"center"}}>{"Add Products Details"}</DialogTitle>
-        <DialogContent style={{background:"linear-gradient(45deg, black, #333272)",}}>
-          <DialogContentText id="alert-dialog-slide-description">
-          <form onSubmit={handleSubmit} style={{marginTop:"30px"}}>
-            <div className="mb-3">
-              <h5 className="text-light">
-                <strong>Product Title</strong>
-              </h5>
-              <input
-                type="text"
-                autoComplete="off"
-                name="title"
-                className="form-control form-control-lg wh-100"
-                placeholder="Enter name"
-                required
-              onChange={(e) => setInputData({...inputData ,title: e.target.value})}
-              />
-            </div>
-            <div className="mb-3">
-              <h5 className="text-light">
-                <strong>Product Company</strong>
-              </h5>
-              <input
-                type="text"
-                name="company"
-                className="form-control form-control-lg"
-                placeholder="Enter company"
-                required
-                onChange={(e) => setInputData({...inputData ,company: e.target.value})}
-              />
-            </div>
-            <div className="mb-3">
-              <h5 className="text-light">
-                <strong>Product Description</strong>
-              </h5>
-              <input
-                type="text"
-                name="des"
-                required
-                className="form-control form-control-lg"
-                placeholder="Enter description"
-                onChange={(e) => setInputData({...inputData ,des: e.target.value})}
-              />
-            </div>
-            <div className="mb-3">
-              <h5 className="text-light">
-                <strong>Product Price</strong>
-              </h5>
-              <input
-                type="number"
-                name="price"
-                className="form-control form-control-lg"
-                placeholder="Enter price"
-                required
-             onChange={(e) => setInputData({...inputData ,price: e.target.value})}
-              />
-            </div>
-            <div className="mb-3">
-              <h5 className="text-light">
-                <strong>Product Image</strong>
-              </h5>
-              <input
-                type="text"
-                name="img"
-                className="form-control form-control-lg"
-                placeholder="Enter Img path"
-                required
-             onChange={(e) => setInputData({...inputData ,img: [e.target.value]})}
-              />
-            </div>
-
-            <DialogActions >
-      
-              <button type="submit" className="btn btn-danger btn-lg w-100">
-                Add
-              </button>
-            
-        </DialogActions>
-          </form>
-          </DialogContentText>
-        </DialogContent>
-        
-        </div>
-      </Dialog>
-    </React.Fragment>
+  
         <div className={classes.Container}>
           {value.map((result, index) => (
             <Cards variant="card" className={classes.card} >

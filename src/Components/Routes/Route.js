@@ -10,6 +10,7 @@ import { SideNav } from "../common/side";
 import { Products } from "../common/Products";
 import { ProductDetails } from "../common/ProductDetails";
 import AddCart from "../common/AddCart";
+import { AdminProductPage } from "../templates/Admin/AdminProductPage";
 
 
 
@@ -23,6 +24,7 @@ export const Routeall = () => {
           <Routes>
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/product" element={<Protected Component={Products}/>} />
+            <Route path="/admin" element={<Protected Component={AdminProductPage}/>} />
             <Route path="/product" element={<ProductDetails/>} />
             <Route path="/cart/:id" element={<AddCart/>} />
             <Route path="/about" element={<Protected Component={About}/>} />

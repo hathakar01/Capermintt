@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { GrUserAdmin } from "react-icons/gr";
 // import "../Drawer/side1.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -166,22 +167,18 @@ export const SideNav = ({ children }) => {
       name: "Product",
       icon: <FaProductHunt />,
     },
-    {
-      path: "/About",
-      name: "About",
-      icon: <FaUserAlt />,
-    },
-    {
-      path: "/Contact",
-      name: "Contact",
-      icon: <FaCommentAlt />,
-    },
+    
     {
       path: "/cart/:id",
       name: "Cart",
       icon: <FaCartPlus  />,
     },
-
+    
+    {
+      path: "/admin",
+      name: "Admin Product",
+      icon: <GrUserAdmin />,
+    },
     {
       path: "/Login",
       name: "Login",
