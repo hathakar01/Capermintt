@@ -14,6 +14,7 @@ import Cards from "../../common/MyComponents/Cards";
 
 import { UpdateDialog } from "../../common/MyComponents/UpdateDialog";
 import { InsertDialog } from "../../common/MyComponents/InsertDialog";
+import { Loader } from "../../common/Loader";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -77,18 +78,26 @@ export const AdminProductPage = () => {
   const [value, setValue] = useState([]);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editProductData, setEditProductData] = useState(null);
-  const [inputData, setInputData] = useState({
-    title: "",
-    company: "",
-    des: "",
-    price: "",
-    img: "",
-  });
+  const [loading, setLoading] = useState(true);
 
   const handleCard = (product) => {
     console.log(product);
     navigate(`/product/${product}`);
   };
+
+  // handle delete fun
+  const handleDelete = (id1) =>{
+    console.log(id1, '---> id')
+   
+    axios.delete("https://65c4700adae2304e92e29905.mockapi.io/p1/product/" + id1)
+    .then(res =>{
+      alert("Product Deleted!")
+      navigate('/product')
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  }
 
   // handle edit dialog
   const handleEditDialog = (value) => {
@@ -99,12 +108,15 @@ export const AdminProductPage = () => {
   useEffect(() => {
     axios
       .get("https://65c4700adae2304e92e29905.mockapi.io/p1/product")
-      .then((res) => setValue(res.data))
+      .then((res) => {setValue(res.data);
+        setLoading(false); // Set loading to false when data is fetched
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <>
+       {loading && <Loader />}
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
         <React.Fragment>
@@ -151,6 +163,7 @@ export const AdminProductPage = () => {
                     className={classes.textButton}
                     variant="contained"
                     size="medium"
+                    onClick={() => handleDelete(result?.id)}
                   >
                     Delete
                   </Button>
