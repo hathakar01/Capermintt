@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
 export const AdminProductPage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const handleCard = (value) => {
-    console.log(value);
-    navigate(`/product/${value}`);
+  const handleCard = (product) => {
+    console.log(product);
+    navigate(`/product/${product}`);
   };
 
   const dispatch = useDispatch();

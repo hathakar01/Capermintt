@@ -31,7 +31,7 @@ export const Routeall = () => {
             <Route path="/" element={<Protected Component={Home}/>} />
             <Route path="/product" element={<Protected Component={Products}/>} />
             <Route path="/admin" element={<Protected Component={AdminProductPage}/>} />
-            <Route path="/product" element={<ProductDetails/>} />
+            <Route path="/product/:id" element={<ProductDetails/>} />
             <Route path="/cart/:id" element={<AddCart/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route

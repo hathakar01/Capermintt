@@ -72,10 +72,10 @@ const useStyles = makeStyles((theme) => ({
 export const Products = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const handleCard = (value) => {
-    console.log(value);
-    navigate(`/product/${value}`);
-  };
+  // const handleCard = (value) => {
+  //   console.log(value);
+  //   navigate(`/product/${value}`);
+  // };
 
   const dispatch = useDispatch();
 
@@ -89,15 +89,6 @@ export const Products = () => {
     // navigate(`/cart`)
   };
   
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const [inputData, setInputData] = useState({
     title:'',
@@ -118,19 +109,11 @@ export const Products = () => {
   }, []);
 
   console.log(value, 'value');
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.post('https://65c4700adae2304e92e29905.mockapi.io/p1/product/', inputData)
-    .then(res =>{
-      alert("Add the data success!")
-      navigate('/product')
-      setOpen(false)
-    })
-  }
 
   
- 
+  const handleCard = (data) => {
+    navigate(`/product/${data}`);
+  } 
   return (
     <>
       <Container maxWidth="lg">
@@ -138,7 +121,7 @@ export const Products = () => {
   
         <div className={classes.Container}>
           {value.map((result, index) => (
-            <Cards variant="card" className={classes.card} >
+            <Cards variant="card" className={classes.card} key={index}>
               <div onClick={() => handleCard(result.id)}>
                 <div>
                   <img
