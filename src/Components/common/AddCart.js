@@ -116,8 +116,8 @@ const AddCart = () => {
     }
   };
 
-  const handleCard = (product) => {
-    navigate(`/product/${product.id}`, { state: { quantity: quantities[product.id] || 1 } });
+  const handleBuyProduct = (product) => {
+    navigate(`/buy/${product.id}`);  // { state: { quantity: quantities[product.id] || 1 } }
   };
 
   return (
@@ -161,7 +161,7 @@ const AddCart = () => {
                   variant="contained"
                   size="medium"
                   style={{ backgroundColor: "#e43131cf", color: "white" }}
-                  onClick={() => handleCard(product)}
+                  onClick={() => handleBuyProduct(product)}
                 >
                   Buy Now
                 </Button>

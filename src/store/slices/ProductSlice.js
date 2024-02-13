@@ -6,8 +6,16 @@ const productSlice = createSlice({
     initialState:[],
     reducers: {
         addToCart(state, action) {
-            state.push(action.payload);
-           console.log(action.payload, 'store');
+
+            const productId = action.payload;
+            const isProductInCart = state.some((product) => product.id === productId.id)
+            if(!isProductInCart){
+                state.push(action.payload);
+               console.log(action.payload, 'store');
+
+            }else{
+                alert("Product is already Add!!")
+            }
             // console.log(action)
         },
         login(state, action){

@@ -11,13 +11,14 @@ import Cards from "./MyComponents/Cards";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/slices/ProductSlice";
 import { color } from "@material-ui/system";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
-import axios from 'axios';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
+import axios from "axios";
+import { Loader } from "./Loader";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop:"20px",
+    marginTop: "20px",
     gap: "1em",
   },
   cardAction: {
@@ -72,14 +73,31 @@ const useStyles = makeStyles((theme) => ({
 export const Products = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  // const handleCard = (value) => {
-  //   console.log(value);
-  //   navigate(`/product/${value}`);
-  // };
 
   const dispatch = useDispatch();
 
   const [addedProducts, setAddedProducts] = useState([]);
+
+  const [inputData, setInputData] = useState({
+    title: "",
+    company: "",
+    des: "",
+    price: "",
+    img: "",
+  });
+
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("https://65c4700adae2304e92e29905.mockapi.io/p1/product")
+      .then((res) => {setValue(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const addProduct = (productData) => {
     console.log(productData, "product");
@@ -88,37 +106,18 @@ export const Products = () => {
     setAddedProducts([...addedProducts, productData.id]);
     // navigate(`/cart`)
   };
-  
 
-  const [inputData, setInputData] = useState({
-    title:'',
-    company:'',
-    des:'',
-    price:'',
-    img:''
-  })
-  
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState([])
-  
+  console.log(value, "value");
 
-  useEffect(() =>{
-    axios.get('https://65c4700adae2304e92e29905.mockapi.io/p1/product')
-    .then(res => setValue(res.data))
-    .catch(err => console.log(err))
-  }, []);
-
-  console.log(value, 'value');
-
-  
   const handleCard = (data) => {
     navigate(`/product/${data}`);
-  } 
+  };
   return (
     <>
+      {loading ? <Loader/> : (
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
-  
+
         <div className={classes.Container}>
           {value.map((result, index) => (
             <Cards variant="card" className={classes.card} key={index}>
@@ -135,8 +134,8 @@ export const Products = () => {
                     {result.company}
                   </Typography>
                   <Typo variant="title">{result.title}</Typo>
-                  <div style={{height:"70px"}}>
-                  <Typo variant="des">{result.des}</Typo>
+                  <div style={{ height: "70px" }}>
+                    <Typo variant="des">{result.des}</Typo>
                   </div>
                   <Typo variant="des1">
                     (Only <b>7</b> left in stock!)
@@ -164,7 +163,7 @@ export const Products = () => {
           ))}
         </div>
       </Container>
+      )}
     </>
   );
 };
-

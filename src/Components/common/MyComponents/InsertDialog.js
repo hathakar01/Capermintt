@@ -8,6 +8,7 @@ import { Typography, Button, Slide } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../Loader";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -18,6 +19,17 @@ export const InsertDialog = () => {
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
+  const [inputData, setInputData] = useState({
+    title: "",
+    company: "",
+    des: "",
+    price: "",
+    img: "",
+  });
+  
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,18 +38,7 @@ export const InsertDialog = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [inputData, setInputData] = useState({
-    title: "",
-    company: "",
-    des: "",
-    price: "",
-    img: "",
-  });
-
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState([]);
-
+  
   useEffect(() => {
     axios
       .get("https://65c4700adae2304e92e29905.mockapi.io/p1/product")
@@ -55,6 +56,7 @@ export const InsertDialog = () => {
       .then((res) => {
         alert("Add the data success!");
         navigate("/product");
+        setLoading(false);
         setOpen(false);
       });
   };
@@ -72,6 +74,7 @@ export const InsertDialog = () => {
       >
         Add Product
       </Button>
+     
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -174,7 +177,7 @@ export const InsertDialog = () => {
                     }
                   />
                 </div>
-
+               
                 <DialogActions>
                   <button type="submit" className="btn btn-danger btn-lg w-100">
                     Add

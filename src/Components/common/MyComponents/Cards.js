@@ -16,8 +16,22 @@ const useStyles = makeStyles({
         },
     },
 
+    buyCard: {
+        // gap: '3em',
+        flexWrap: 'wrap',
+       flex : '0.5 0 25rem',  // 1 0 8rem
+        alignItems: "center",
+        justifyContent: "center",
+    //    display:"flex",
+        boxShadow: '0 4px 14px 9px rgba(0,0,0,0.2)  ',
+        transition: '0.3s',
+        width: '60%',
+        background:"linear-gradient(290deg, #198b9b99, #f4f1f1)"
+        // maxWidth: 100,
+    },
+
     addToCart :{
-        flex : '1 0 8rem',
+        flex : '1 0 8rem',   
         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
         // display:"grid",
         transition: '0.3s',
@@ -45,7 +59,7 @@ const useStyles = makeStyles({
 const Cards = ({ children, variant }) => {
     const classes = useStyles()
     return (
-        <div className={variant === "card" ? classes.card : variant === "addToCart"}>{children}</div>
+        <div className={variant === "card" ? classes.card : variant === "addToCart"? classes.addToCart : classes.buyCard}>{children}</div>
     )
 }
 
