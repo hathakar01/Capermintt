@@ -31,7 +31,8 @@ export const Login = () => {
    const login =(userData)=>{
    // alert("hyy")
        localStorage.setItem('login', JSON.stringify(userData) );
-       navigate('/');
+       navigate('/'); 
+       window.location.reload();
    }
 
   return (

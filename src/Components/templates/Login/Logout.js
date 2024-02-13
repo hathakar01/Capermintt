@@ -6,6 +6,7 @@ export const Logout = () => {
     const logout =()=>{
         localStorage.removeItem('login');
         navigate('/login');
+        window.location.reload();
     }
 
     const navigate = useNavigate();

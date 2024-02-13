@@ -6,9 +6,11 @@ import {
   FaHome,
   FaUnlock,
   FaProductHunt,
+  FaCartPlus 
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { GrUserAdmin } from "react-icons/gr";
 // import "../Drawer/side1.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -154,6 +156,11 @@ export const SideNav = ({ children }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+
+  let login = JSON.parse(localStorage.getItem("login"));
+  console.log(login , '02')
+
   const menuItem = [
     {
       path: "/",
@@ -165,17 +172,19 @@ export const SideNav = ({ children }) => {
       name: "Product",
       icon: <FaProductHunt />,
     },
+    
     {
-      path: "/About",
-      name: "About",
-      icon: <FaUserAlt />,
+      path: "/cart/:id",
+      name: "Cart",
+      icon: <FaCartPlus  />,
     },
-    {
-      path: "/Contact",
-      name: "Contact",
-      icon: <FaCommentAlt />,
-    },
-
+    
+    // {
+    //   path: "/admin",
+    //   name: "Admin Product",
+    //   icon: <GrUserAdmin />,
+      
+    // },
     {
       path: "/Login",
       name: "Login",
@@ -187,6 +196,26 @@ export const SideNav = ({ children }) => {
       icon: <FaLock />,
     },
   ];
+
+  if(login?.username === "admin"){
+   
+      menuItem.push({
+              path: "/admin",
+              name: "Admin Product",
+              icon: <GrUserAdmin />,
+              
+            })
+
+}  
+  // if(admin){
+  //   menuItem.push({
+  //       path: "/admin",
+  //       name: "Admin Product",
+  //       icon: <GrUserAdmin />,
+        
+  //     })
+  // }
+
   return (
     <div className={classes.dashboardContainer}>
       <div className="sidebar bg-dark">
@@ -210,15 +239,8 @@ export const SideNav = ({ children }) => {
             Capermint
           </h1>
         </div>
-        {/* <nav className="nav-menu"> 
-                <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/About">About</a></li>
-                        <li><a href="/Contact">Contact</a></li>
-                        <li><a href="/Login">Login</a></li>
-                        <li><a href="/Logout">Logout</a></li>
-                    </ul> */}
         {menuItem.map((item, index) => (
+         
           <NavLink
             to={item.path}
             key={index}

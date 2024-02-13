@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import Data from "./Data.json";
 import { makeStyles } from "@material-ui/core/styles";
 // import Button from "@mui/joy/Button";
-import "./font.css";
-import { useNavigate } from "react-router-dom";
-import Typo from "./MyComponents/Typo";
-import Cards from "./MyComponents/Cards";
+import "../../common/font.css";
+import { Link, useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/slices/ProductSlice";
-import { color } from "@material-ui/system";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import axios from "axios";
-import { Loader } from "./Loader";
+import Typo from "../../common/MyComponents/Typo";
+import Cards from "../../common/MyComponents/Cards";
+
+import { UpdateDialog } from "../../common/MyComponents/UpdateDialog";
+import { InsertDialog } from "../../common/MyComponents/InsertDialog";
+import { Loader } from "../../common/Loader";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -37,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
   action2: {
     display: "grid",
     alignItems: "center",
-    columnGap: "50px",
-    gridTemplateColumns: "auto auto",
+    columnGap: "10px",
+    gridTemplateColumns: "auto auto auto",
     padding: "12px",
     fontSize: "30px",
   },
@@ -68,59 +64,67 @@ const useStyles = makeStyles((theme) => ({
   textDes: {
     fontSize: "clamp(10px, 1vw, 20px)", //min, val, max
   },
+  textButton: {
+    background: "#f63c3c",
+    color: "white",
+  },
 }));
 
-export const Products = () => {
+export const AdminProductPage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const [addedProducts, setAddedProducts] = useState([]);
-
-  const [inputData, setInputData] = useState({
-    title: "",
-    company: "",
-    des: "",
-    price: "",
-    img: "",
-  });
-
-  const [data, setData] = useState([]);
   const [value, setValue] = useState([]);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editProductData, setEditProductData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const handleCard = (product) => {
+    console.log(product);
+    navigate(`/product/${product}`);
+  };
+
+  // handle delete fun
+  const handleDelete = (id1) =>{
+    console.log(id1, '---> id')
+   
+    axios.delete("https://65c4700adae2304e92e29905.mockapi.io/p1/product/" + id1)
+    .then(res =>{
+      alert("Product Deleted!")
+      navigate('/product')
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  }
+
+  // handle edit dialog
+  const handleEditDialog = (value) => {
+    setEditProductData(value);
+    setIsEditDialogOpen(true);
+  };
 
   useEffect(() => {
     axios
       .get("https://65c4700adae2304e92e29905.mockapi.io/p1/product")
       .then((res) => {setValue(res.data);
-        setLoading(false);
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const addProduct = (productData) => {
-    console.log(productData, "product");
-    dispatch(addToCart(productData));
-
-    setAddedProducts([...addedProducts, productData.id]);
-    // navigate(`/cart`)
-  };
-
-  console.log(value, "value");
-
-  const handleCard = (data) => {
-    navigate(`/product/${data}`);
-  };
   return (
     <>
-      {loading ? <Loader/> : (
+       {loading && <Loader />}
       <Container maxWidth="lg">
         <h1 className="poppinsRegular text-center mt-5 mb-5">Product List</h1>
-
+        <React.Fragment>
+          <InsertDialog />
+        </React.Fragment>
         <div className={classes.Container}>
           {value.map((result, index) => (
-            <Cards variant="card" className={classes.card} key={index}>
+            <Cards variant="card" className={classes.card}>
               <div onClick={() => handleCard(result.id)}>
                 <div>
                   <img
@@ -146,24 +150,41 @@ export const Products = () => {
               <div className="bg-dark">
                 <div className={classes.action2}>
                   <h3 className={classes.text2}>₹{result.price}</h3>
+                  <Button
+                    variant="contained"
+                    size="medium"
+                    onClick={() => handleEditDialog(result)}
+                  >
+                    {/* <Link to={`/updated/${result.id}`}>Edit</Link> */}
+                    Edit
+                  </Button>
 
                   <Button
                     className={classes.textButton}
                     variant="contained"
                     size="medium"
-                    onClick={() => addProduct(result)}
-                    disabled={addedProducts.includes(result.id)}
+                    onClick={() => handleDelete(result?.id)}
                   >
-                    Add to Cart{" "}
-                    {/* {addedProducts.includes(result.id) ? 'Added to Cart' : 'Add to Cart'} */}
+                    Delete
                   </Button>
                 </div>
               </div>
             </Cards>
           ))}
+          {isEditDialogOpen && (
+            <UpdateDialog
+              open={isEditDialogOpen}
+              close={setIsEditDialogOpen}
+              editProductData={editProductData}
+            />
+          )}
+          {/* <EditDialog
+            open={isEditDialogOpen}
+            close={setIsEditDialogOpen}
+            editProductData={editProductData}
+          /> */}
         </div>
       </Container>
-      )}
     </>
   );
 };
