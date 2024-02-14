@@ -12,6 +12,7 @@ import { ProductDetails } from "../common/ProductDetails";
 import AddCart from "../common/AddCart";
 import { AdminProductPage } from "../templates/Admin/AdminProductPage";
 import { BuyProduct } from "../templates/BuyNow/BuyProduct";
+import { YourOrders } from "../templates/Orders/YourOrders";
 
 
 
@@ -36,6 +37,7 @@ export const Routeall = () => {
             <Route path="/product/:id" element={<ProductDetails/>} />
             <Route path="/cart/:id" element={<AddCart/>} />
             <Route path="/buy/:id" element={<BuyProduct/>} />
+            <Route path="/order" element={<YourOrders/>} />
             <Route path="/about" element={<Protected Component={About}/>} />
             <Route
               path="/contact"

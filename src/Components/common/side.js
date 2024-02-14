@@ -6,7 +6,8 @@ import {
   FaHome,
   FaUnlock,
   FaProductHunt,
-  FaCartPlus 
+  FaCartPlus,
+  FaHeart 
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -177,6 +178,12 @@ export const SideNav = ({ children }) => {
       path: "/cart/:id",
       name: "Cart",
       icon: <FaCartPlus  />,
+    },
+
+    {
+      path: "/order",
+      name: "Your Orders",
+      icon: <FaHeart />,
     },
     
     // {
