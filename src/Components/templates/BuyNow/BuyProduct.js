@@ -5,6 +5,7 @@ import Cards from "../../common/MyComponents/Cards";
 import { Button, Container, Typography, makeStyles } from "@material-ui/core";
 import Typo from "../../common/MyComponents/Typo";
 import { Loader } from "../../common/Loader";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -100,6 +101,10 @@ export const BuyProduct = ({}) => {
   const [loading, setLoading] = useState(true);
   const [deliveryDates, setDeliveryDates] = useState([]);
 
+  const data = useSelector((state) => state.products);
+
+  const selectedQty = data?.find((product) => product.id == id);
+  console.log(selectedQty, "--->buyNow<----");
   useEffect(() => {
     axios
       .get(`https://65c4700adae2304e92e29905.mockapi.io/p1/product/${id}`)
@@ -138,21 +143,23 @@ export const BuyProduct = ({}) => {
     // console.log(buyData.address, "--> Address");
     //console.log(buyData, "--> BuyData");
   };
+  const newPrice = `${selectedQty.price * selectedQty.quantity}`;
 
   const objBuyProduct = {
     date: deliveryDates,
     id: id,
-    name: value.title,
-    company: value.company,
-    price: value.price,
+    name: selectedQty.title,
+    company: selectedQty.company,
+    price: newPrice,
+    quantity : selectedQty.quantity,
   };
   // console.log(objBuyProduct, '--BuyObject--');
 
   const handleSubmit = (event, value) => {
     event.preventDefault();
-    //console.log(value.address, "--->submit");
   };
-
+  
+  
   return (
     <Container maxWidth="lg">
       <h1 className="poppinsRegular text-center mt-5 mb-5">
@@ -160,11 +167,11 @@ export const BuyProduct = ({}) => {
       </h1>
       {loading && <Loader />}
       <div className={classes.Container}>
-        {value ? (
+        {selectedQty ? (
           <Cards variant="buyCard" className={classes.Card1}>
             <div>
               <img
-                src={value.img && value?.img[0]}
+                src={selectedQty.img && selectedQty?.img[0]}
                 alt=""
                 className={classes.CardMedia}
               />
@@ -179,7 +186,7 @@ export const BuyProduct = ({}) => {
                   </div>
                   <div>
                     <h6 className={classes.text01} level="body-xs">
-                      {value.company}
+                      {selectedQty.company}
                     </h6>
                   </div>
                 </div>
@@ -188,7 +195,7 @@ export const BuyProduct = ({}) => {
                     <Typography variant="subtitle1">Product Name:</Typography>
                   </div>
                   <div>
-                    <Typo variant="title">{value.title}</Typo>
+                    <Typo variant="title">{selectedQty.title}</Typo>
                   </div>
                 </div>
                 <div className={classes.container1}>
@@ -196,7 +203,7 @@ export const BuyProduct = ({}) => {
                     <Typography variant="subtitle1">Product Price:</Typography>
                   </div>
                   <div>
-                    <h4 className={classes.text2}>₹{value.price}</h4>
+                    <h4 className={classes.text2}>₹{newPrice}</h4>
                   </div>
                 </div>
                 <div className={classes.container1}>
@@ -206,7 +213,7 @@ export const BuyProduct = ({}) => {
                     </Typography>
                   </div>
                   <div>
-                    <Typo variant="des1">1</Typo>
+                    <Typo variant="des1">{selectedQty.quantity}</Typo>
                   </div>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -238,109 +245,7 @@ export const BuyProduct = ({}) => {
                   </div>
                 </div>
               </div>
-              {/* <Typography variant="subtitle1" className={classes.text01}>
-                      Product Name:
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.text01}>
-                      Product Price:
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.text01}>
-                      Product Quantity:
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.text01}>
-                      Address:
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.text01}>
-                      Your Order:
-                    </Typography>
-             
-                  <div style={{display:"flex"}}>
-                   
-                    
-
-                    
-                    <Typography variant="body1">{value.title}</Typography>
-
-                   
-                    <Typography variant="body1">₹{value.price}</Typography>
-
-                   
-                    <Typography variant="body1">1</Typography>
-
-                   
-                    <textarea
-                      name="address"
-                      rows="2"
-                      cols="30"
-                      onChange={(e) =>
-                        setValue({ ...value, address: e.target.value })
-                      }
-                      style={{ background: "transparent" }}
-                    ></textarea>
-
-                  
-                    <Typography variant="body1">
-                      Delivered by: <b>{deliveryDates}</b>
-                    </Typography> */}
-
-              {/* <table
-                  style={{
-                    width: "400px",
-                    marginTop: "30px",
-                    padding: "10px",
-                    background: "transparent",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <tr>
-                    <td className={classes.tableTd}>Product Comapny : </td>
-                    <td>
-                      <h6 className={classes.text01} level="body-xs">
-                        {value.company}
-                      </h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Name :</td>
-                    <td>
-                      <Typo variant="title">{value.title}</Typo>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Price :</td>
-                    <td>
-                      <h4 className={classes.text2}>₹{value.price}</h4>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Quentity :</td>
-                    <td>
-                      <Typo variant="des1">1</Typo>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Address</td>
-                    <td>
-                      <textarea
-                        name="address"
-                        rows="2"
-                        cols="30"
-                        onChange={(e) =>
-                          setValue({ ...value, address: e.target.value })}
-                        style={{ background: "transparent" }}
-                      ></textarea>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Your Order :</td>
-                    <td>
-                      <p className={classes.text01}>
-                        Delived by <b>{deliveryDates}</b>{" "}
-                      </p>
-                    </td>
-                  </tr>
-                </table> */}
-
+              
               <div className={classes.btn}>
                 <Button
                   className={classes.textButton}

@@ -18,10 +18,16 @@ const productSlice = createSlice({
             }
             // console.log(action)
         },
-        login(state, action){
-            
+        buyNow(state, action) {
+            const { id, quantity } = action.payload;
+            const productToUpdate = state.find((product) => product.id === id);
+      
+            if (productToUpdate) {
+
+              productToUpdate.quantity = quantity;
+              console.log(action.payload, "qty")
+            }
         },
-        buyNow(state, action) {},
         deleteProduct(state, action) {
             // console.log(action.payload)
             // state.pop(action.payload)

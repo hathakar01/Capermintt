@@ -12,7 +12,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import { MdDeleteOutline } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
-import { deleteProduct } from "../../store/slices/ProductSlice";
+import {
+  addToCart,
+  buyNow,
+  deleteProduct,
+} from "../../store/slices/ProductSlice";
 import Typo from "./MyComponents/Typo";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: "start",
     justifyContent: "end",
     alignContent: "center",
+    marginRight: "auto",
   },
   action2: {
     display: "grid",
@@ -66,11 +71,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "12px",
     fontSize: "30px",
     alignItems: "end",
+    marginRight: "30px",
   },
-  
-  deletIcon:{
-      height:'30px',
-      width: '40px'
+
+  deletIcon: {
+    height: "30px",
+    width: "40px",
   },
   text2: {
     color: "black",
@@ -78,12 +84,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     display: "flex",
   },
-  total:{
+  total: {
     display: "flex",
     alignItems: "center",
     justifyContent: "end",
-    margin: "40px"
-  }
+    margin: "40px",
+  },
 }));
 
 const AddCart = () => {
@@ -101,23 +107,37 @@ const AddCart = () => {
   };
 
   const handleIncrement = (id) => {
-    setQuantities(prevState => ({
+    setQuantities((prevState) => ({
       ...prevState,
-      [id]: (prevState[id] || 0) + 1
+      [id]: (prevState[id] || 0) + 1,
     }));
+    dispatch(buyNow({ id, quantity: quantities[id] + 1 }));
   };
+
+  console.log(quantities, "---qty");
 
   const handleDecrement = (id) => {
     if (quantities[id] > 1) {
-      setQuantities(prevState => ({
+      setQuantities((prevState) => ({
         ...prevState,
-        [id]: prevState[id] - 1
+        [id]: prevState[id] - 1,
       }));
+      dispatch(buyNow({ id, qty: quantities[id] - 1 }));
     }
   };
 
+  const calculateNewPrice = (product) => {
+    const oldPrice = product.price;
+    const quantity = quantities[product.id] || 1;
+    const totalPrice = oldPrice * quantity;
+    return totalPrice;
+  };
+
   const handleBuyProduct = (product) => {
-    navigate(`/buy/${product.id}`);  // { state: { quantity: quantities[product.id] || 1 } }
+    //navigate(`/buy/${product.id}`);
+    //const quantity = quantities[product.id] || 1;
+    navigate(`/buy/${product?.id}`);
+    console.log(data);
   };
 
   return (
@@ -134,7 +154,7 @@ const AddCart = () => {
           <Card variant="addCard" className={classes.card} key={id}>
             <div className={classes.mainContainer}>
               <img
-                src={product.img[0]}
+                src={product.img && product.img[0]}
                 alt="abc"
                 className={classes.CardMedia}
               />
@@ -142,15 +162,21 @@ const AddCart = () => {
                 <Typography variant="body1">{product.company}</Typography>
                 <Typography variant="h5">{product.title}</Typography>
                 <Typography variant="body1">{product.des}</Typography>
-                <Typography variant="h6">₹{product.price * (quantities[product.id] || 1)}</Typography>
+                <Typography variant="h6">₹{product.price}</Typography>
+                {/* {product.price * (quantities[product.id] || 1)} */}
+                <Typography variant="h6">
+                  <b>Total Price:</b> ₹{calculateNewPrice(product)}
+                </Typography>
               </div>
-              <div className={classes.action2}></div>
+
               <div className={classes.action2}>
                 <div className={classes.text2}>
                   <Button onClick={() => handleDecrement(product.id)}>
                     <FaRegMinusSquare />
                   </Button>
-                  <Typography className={classes.text2}>{quantities[product.id] || 1}</Typography>
+                  <Typography className={classes.text2}>
+                    {quantities[product.id] || 1}
+                  </Typography>
                   <Button onClick={() => handleIncrement(product.id)}>
                     <FaRegPlusSquare />
                   </Button>
@@ -180,7 +206,5 @@ const AddCart = () => {
     </Container>
   );
 };
-
-
 
 export default AddCart;

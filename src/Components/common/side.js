@@ -232,7 +232,7 @@ export const SideNav = ({ children }) => {
             className={classes.menuBtn}
           >
             <img
-              src="image/Capermint.png"
+              src="/image/Capermint.png"
               alt="Logo"
               width={50}
               onClick={toggle}
